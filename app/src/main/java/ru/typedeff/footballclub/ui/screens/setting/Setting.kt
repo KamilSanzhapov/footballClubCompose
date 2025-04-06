@@ -12,7 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -24,13 +27,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import org.koin.androidx.compose.koinViewModel
 import ru.typedeff.footballclub.R
 import ru.typedeff.footballclub.ui.widgets.TextNormal
 import ru.typedeff.footballclub.ui.widgets.TopBar
 
 @Composable
 fun SettingScreen(
-    navController: NavHostController
+    navController: NavHostController, function: (Boolean) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -39,15 +43,20 @@ fun SettingScreen(
             })
         }) { padding ->
         Column(modifier = Modifier.padding(padding)) {
-            SettingItems()
+            SettingItems(function)
         }
     }
 }
 
 @Preview
 @Composable
-fun SettingItems() {
+fun SettingItems(function: ((Boolean) -> Unit)? = null) {
+
+    val viewModel: SettingsViewModel = koinViewModel()
+    val themeState = viewModel.themeLiveData.observeAsState()
+
     var checked by remember { mutableStateOf(true) }
+
     Row(
 
         modifier = Modifier
@@ -76,7 +85,14 @@ fun SettingItems() {
             checked = checked,
             onCheckedChange = {
                 checked = it
+                function?.invoke(it)
             })
     }
 
+    LaunchedEffect(themeState) {
+        checked = themeState.value == true
+    }
+    SideEffect {
+        viewModel.loadData()
+    }
 }
