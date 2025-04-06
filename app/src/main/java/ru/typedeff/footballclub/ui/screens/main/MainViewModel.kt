@@ -27,11 +27,8 @@ class MainViewModel(private val getAreaEuropeUseCase: GetAvailableAreasUseCase) 
     fun loadEuropeArea() {
 
         viewModelScope.launch {
-            stateLoad.value = LoadState.Loaded
             val result = getAreaEuropeUseCase.execute()
-
             areaLiveData.value = result
-            stateLoad.value = LoadState.Loaded
         }
     }
 

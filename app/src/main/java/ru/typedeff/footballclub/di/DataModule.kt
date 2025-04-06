@@ -12,7 +12,7 @@ import ru.typedeff.footballclub.domain.repos.CompetitionRepository
 val dataModule = module {
 
     single<ApiService> {
-        RetrofitComponent(context = get()).getApi()
+        RetrofitComponent().getApi()
     }
 
     single<AreaRepository> {

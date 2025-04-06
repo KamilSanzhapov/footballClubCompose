@@ -1,8 +1,6 @@
 package ru.typedeff.footballclub.ui.screens.setting
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -27,9 +25,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ru.typedeff.footballclub.R
-import ru.typedeff.footballclub.ui.theme.Black
-import ru.typedeff.footballclub.ui.theme.FootballClubTheme
-import ru.typedeff.footballclub.ui.theme.PurpleGrey80
 import ru.typedeff.footballclub.ui.widgets.TextNormal
 import ru.typedeff.footballclub.ui.widgets.TopBar
 
@@ -57,21 +52,27 @@ fun SettingItems() {
 
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 8.dp, bottom = 8.dp).clickable{
+            .padding(start = 16.dp, top = 8.dp, bottom = 8.dp)
+            .clickable {
                 checked = !checked
             },
 
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.padding(end = 1.dp).size(20.dp),
+            modifier = Modifier
+                .padding(end = 1.dp)
+                .size(20.dp),
             painter = painterResource(R.drawable.ic_dark_theme),
             contentDescription = ""
         )
         TextNormal("Ночной режим")
         Spacer(modifier = Modifier.weight(1f))
         Switch(
-            modifier = Modifier.padding(vertical = 14.dp).scale(0.6f).height(20.dp),
+            modifier = Modifier
+                .padding(vertical = 14.dp)
+                .scale(0.6f)
+                .height(20.dp),
             checked = checked,
             onCheckedChange = {
                 checked = it

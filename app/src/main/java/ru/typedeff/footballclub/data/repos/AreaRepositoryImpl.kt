@@ -3,7 +3,6 @@ package ru.typedeff.footballclub.data.repos
 import ru.typedeff.footballclub.data.api.ApiService
 import ru.typedeff.footballclub.data.converter.toModel
 import ru.typedeff.footballclub.domain.models.AreaModel
-import ru.typedeff.footballclub.domain.models.ListCompetitionModel
 import ru.typedeff.footballclub.domain.models.ListAreaModel
 import ru.typedeff.footballclub.domain.repos.AreaRepository
 

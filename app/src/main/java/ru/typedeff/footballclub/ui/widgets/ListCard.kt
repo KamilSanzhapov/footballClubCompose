@@ -1,7 +1,5 @@
 package ru.typedeff.footballclub.ui.widgets
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ListCard( content: @Composable ColumnScope.() -> Unit){
+fun ListCard(content: @Composable ColumnScope.() -> Unit) {
     Card(
         modifier = Modifier.padding(vertical = 3.dp),
         colors = CardDefaults.cardColors(

@@ -1,6 +1,5 @@
 package ru.typedeff.footballclub.data.api
 
-import android.content.Context
 import ru.typedeff.footballclub.utils.API_ENDPOINT
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -11,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class RetrofitComponent(context: Context) {
+class RetrofitComponent() {
 
     private val userAgentInterceptor = Interceptor { chain ->
         val originalRequest: Request = chain.request()

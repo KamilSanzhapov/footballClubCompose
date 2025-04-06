@@ -2,7 +2,6 @@ package ru.typedeff.footballclub.ui.widgets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +44,10 @@ fun TopBarIcon(
 @Preview()
 @Composable
 fun TopBar(
-    title: String = "", centerIcon: String = "", onLeftClick: (() -> Unit)? = null, onRightClick: (() -> Unit)? = null
+    title: String = "",
+    centerIcon: String = "",
+    onLeftClick: (() -> Unit)? = null,
+    onRightClick: (() -> Unit)? = null
 ) {
     Column {
         Row(
