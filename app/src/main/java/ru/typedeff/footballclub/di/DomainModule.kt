@@ -5,6 +5,7 @@ import ru.typedeff.footballclub.domain.usecases.ChangeThemeUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAreaByIdUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAvailableAreasUseCase
 import ru.typedeff.footballclub.domain.usecases.GetCompetitionByIdUseCase
+import ru.typedeff.footballclub.domain.usecases.GetStandingsCompetitionByIdUseCase
 
 
 val domainModule = module {
@@ -24,5 +25,8 @@ val domainModule = module {
         ChangeThemeUseCase(settingsRepository = get())
     }
 
+    factory<GetStandingsCompetitionByIdUseCase> {
+        GetStandingsCompetitionByIdUseCase(competitionRepository = get())
+    }
 
 }

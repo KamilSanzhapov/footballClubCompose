@@ -12,3 +12,12 @@ data class CompetitionModel(
     var emblem: String,
     var plan: String
 )
+
+
+data class CompetitionShortModel(
+    var id: Int? = null,
+    var name: String? = null,
+    var code: String? = null,
+    var type: String? = null,
+    var emblem: String? = null
+)

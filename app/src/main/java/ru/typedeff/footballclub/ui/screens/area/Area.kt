@@ -9,13 +9,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import ru.typedeff.footballclub.domain.models.CompetitionModel
+import ru.typedeff.footballclub.navigation.Screen
 import ru.typedeff.footballclub.ui.widgets.CompetitionItem
 import ru.typedeff.footballclub.ui.widgets.ListCard
 import ru.typedeff.footballclub.ui.widgets.TopBar
@@ -24,7 +25,7 @@ import ru.typedeff.footballclub.ui.widgets.TopBar
 fun AreaScreen(
     navController: NavHostController, id: String
 ) {
-    val vm = koinViewModel<AreaViewModel>()
+    val vm = koinViewModel<AreaViewModel>(parameters = { parametersOf(id) })
     val areaState = vm.areaState.observeAsState()
     val competitionState = vm.competitionState.observeAsState()
 
@@ -47,17 +48,12 @@ fun AreaScreen(
                 items(competitionState.value?.competitions?.size ?: 0) { index ->
                     competitionState.value?.competitions?.get(index)?.let { competition ->
                         CompetitionCard(competition) {
-
+                            navController.navigate(Screen.Competition.screenName + "/${competition.id}")
                         }
                     }
                 }
             }
         }
-    }
-
-    SideEffect {
-        vm.loadAreaInfo(id)
-        vm.loadCompetitionInfo(id)
     }
 }
 

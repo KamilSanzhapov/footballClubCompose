@@ -51,9 +51,9 @@ fun MainScreen(
         ) {
             LazyColumn(Modifier.padding(start = 8.dp, end = 8.dp, top = 12.dp)) {
                 items(areaState.value?.areas?.size ?: 0) { index ->
-                    areaState.value?.areas?.get(index)?.let {
-                        AreaCard(it) {
-                            navController.navigate(Screen.Area.screenName + "${it.id}")
+                    areaState.value?.areas?.get(index)?.let { area ->
+                        AreaCard(area) {
+                            navController.navigate(Screen.Area.screenName + "/${area.id}")
                         }
                     }
                 }
@@ -63,7 +63,7 @@ fun MainScreen(
 }
 
 @Composable
-fun AreaCard(areaModel : AreaModel, click: ()->Unit){
+fun AreaCard(areaModel: AreaModel, click: () -> Unit) {
     ListCard {
         Box(modifier = Modifier.clickable(onClick = click)) {
             AreaItem(areaModel)

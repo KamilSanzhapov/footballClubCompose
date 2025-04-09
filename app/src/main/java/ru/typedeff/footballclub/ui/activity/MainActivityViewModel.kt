@@ -7,6 +7,11 @@ import ru.typedeff.footballclub.domain.usecases.ChangeThemeUseCase
 
 class MainActivityViewModel(private val themeUseCase: ChangeThemeUseCase) : ViewModel() {
 
+    val themeState = MutableLiveData<Boolean>(false)
+
+    init {
+        loadData()
+    }
     fun loadData(){
         themeState.value = themeUseCase.get().toggle
     }
@@ -15,6 +20,6 @@ class MainActivityViewModel(private val themeUseCase: ChangeThemeUseCase) : View
         themeUseCase.save(ThemeModel.from(darkTheme) ?: return)
     }
 
-    val themeState = MutableLiveData<Boolean>(false)
+
 
 }

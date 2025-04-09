@@ -75,7 +75,7 @@ fun SettingItems(function: ((Boolean) -> Unit)? = null) {
             painter = painterResource(R.drawable.ic_dark_theme),
             contentDescription = ""
         )
-        TextNormal("Ночной режим")
+        TextNormal("Ночной режим", modifier = Modifier.padding(16.dp))
         Spacer(modifier = Modifier.weight(1f))
         Switch(
             modifier = Modifier

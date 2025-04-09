@@ -11,9 +11,15 @@ import ru.typedeff.footballclub.domain.usecases.GetCompetitionByIdUseCase
 
 class AreaViewModel(
     private val getCompetitionByIdUseCase: GetCompetitionByIdUseCase,
-    private val getAreaByIdUseCase: GetAreaByIdUseCase
+    private val getAreaByIdUseCase: GetAreaByIdUseCase,
+    areaId: String
 ) : ViewModel() {
 
+
+    init {
+        loadAreaInfo(id = areaId)
+        loadCompetitionInfo(id = areaId)
+    }
 
     val areaState = MutableLiveData<AreaModel>()
     val competitionState = MutableLiveData<ListCompetitionModel>()
@@ -24,7 +30,7 @@ class AreaViewModel(
         }
     }
 
-    fun loadCompetitionInfo(id: String){
+    fun loadCompetitionInfo(id: String) {
         viewModelScope.launch {
             val res = getCompetitionByIdUseCase.execute(id)
             competitionState.value = res

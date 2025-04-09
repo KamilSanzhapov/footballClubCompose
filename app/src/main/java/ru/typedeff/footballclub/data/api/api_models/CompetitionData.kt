@@ -14,14 +14,26 @@ data class CompetitionData(
     @SerializedName("type") var type: String? = null,
     @SerializedName("emblem") var emblem: String? = null,
     @SerializedName("plan") var plan: String? = null,
-    @SerializedName("currentSeason") var currentSeason: CurrentSeason? = CurrentSeason(),
+    @SerializedName("currentSeason") var currentSeason: CurrentSeasonData? = CurrentSeasonData(),
     @SerializedName("numberOfAvailableSeasons") var numberOfAvailableSeasons: Int? = null,
     @SerializedName("lastUpdated") var lastUpdated: String? = null
 )
 
-data class CurrentSeason(
+data class CurrentSeasonData(
     @SerializedName("id") var id: Int? = null,
     @SerializedName("startDate") var startDate: String? = null,
     @SerializedName("endDate") var endDate: String? = null,
     @SerializedName("currentMatchday") var currentMatchday: Int? = null
 )
+
+
+data class CompetitionShortData (
+
+    @SerializedName("id"     ) var id     : Int?    = null,
+    @SerializedName("name"   ) var name   : String? = null,
+    @SerializedName("code"   ) var code   : String? = null,
+    @SerializedName("type"   ) var type   : String? = null,
+    @SerializedName("emblem" ) var emblem : String? = null
+
+)
+

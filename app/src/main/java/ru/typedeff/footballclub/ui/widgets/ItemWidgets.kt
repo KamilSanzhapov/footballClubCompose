@@ -38,7 +38,7 @@ fun BaseItem(title: String, leftIcon: String, onRightBtn: (() -> Unit)? = null) 
             .fillMaxWidth()
     ) {
         SVGImage(leftIcon)
-        TextNormal(title)
+        TextNormal(title, modifier = Modifier.padding(horizontal = 16.dp))
         Spacer(modifier = Modifier.weight(1f))
         Icon(Icons.Filled.KeyboardArrowRight, "")
     }

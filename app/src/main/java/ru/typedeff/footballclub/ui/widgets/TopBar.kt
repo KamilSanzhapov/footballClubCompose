@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -57,7 +57,7 @@ fun TopBar(
                 .background(color = MaterialTheme.colorScheme.primary),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TopBarIcon(Icons.Filled.ArrowBack, onLeftClick == null, onLeftClick)
+            TopBarIcon(Icons.AutoMirrored.Filled.ArrowBack, onLeftClick == null, onLeftClick)
             Spacer(modifier = Modifier.weight(1f))
             SVGImage(centerIcon)
             TextTitle(title)

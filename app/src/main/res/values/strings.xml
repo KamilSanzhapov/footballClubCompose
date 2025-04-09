@@ -4,4 +4,17 @@
     <string name="main_title">Европа</string>
     <string name="setting_title">Настройки</string>
 
+
+    <string name="standings_position"> </string>
+    <string name="standings_club">Клуб</string>
+    <string name="standings_all_games">СИ</string>
+    <string name="standings_won">В</string>
+    <string name="standings_draw">Н</string>
+    <string name="standings_lost">П</string>
+    <string name="standings_goals_for">ЗМ</string>
+    <string name="standings_goals_against">ПМ</string>
+    <string name="standings_goals_diff">РМ</string>
+    <string name="standings_points">О</string>
+
+
 </resources>
