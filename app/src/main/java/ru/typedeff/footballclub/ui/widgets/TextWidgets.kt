@@ -10,8 +10,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TextTitle(str: String) {
-    TextBase(str, 18.sp, )
+fun TextTitle(str: String, modifier: Modifier = Modifier) {
+    TextBase(str, 18.sp, modifier = modifier)
 }
 
 @Composable

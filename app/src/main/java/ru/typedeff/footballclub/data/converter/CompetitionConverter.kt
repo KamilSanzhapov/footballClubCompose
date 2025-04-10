@@ -4,8 +4,8 @@ import ru.typedeff.footballclub.data.api.api_models.CompetitionStandingsData
 import ru.typedeff.footballclub.data.api.api_models.ListCompetitionData
 import ru.typedeff.footballclub.data.api.api_models.TableData
 import ru.typedeff.footballclub.data.api.api_models.TeamData
+import ru.typedeff.footballclub.data.db.entities.FavoriteCompetitionEntity
 import ru.typedeff.footballclub.domain.models.CompetitionModel
-import ru.typedeff.footballclub.domain.models.CompetitionShortModel
 import ru.typedeff.footballclub.domain.models.CompetitionStandingsModel
 import ru.typedeff.footballclub.domain.models.ListCompetitionModel
 import ru.typedeff.footballclub.domain.models.TableModel
@@ -16,11 +16,21 @@ import ru.typedeff.footballclub.domain.models.TeamModel
 //
 const val StandingType = "TOTAL"
 
-fun ListCompetitionData.toModel(): ListCompetitionModel {
+fun ListCompetitionData.toModel(allFavoriteCompetitions: List<Int>): ListCompetitionModel {
 
     val competitions = competitions.map {
+
+        val isFavorite = allFavoriteCompetitions.any { id ->
+            it.id.toString() == id.toString()
+        }
         CompetitionModel(
-            it.id ?: -1, it.name ?: "", it.code ?: "", it.type ?: "", it.emblem ?: "", it.plan ?: ""
+            it.id ?: -1,
+            it.name ?: "",
+            it.code ?: "",
+            it.type ?: "",
+            it.emblem ?: "",
+            it.plan ?: "",
+            isFavorite
         )
     }
     return ListCompetitionModel(competitions)
@@ -51,11 +61,11 @@ fun TableData.toModel(): TableModel {
     )
 }
 
-fun CompetitionStandingsData.toModel(): CompetitionStandingsModel {
+fun CompetitionStandingsData.toModel(favoriteCompetition: Boolean): CompetitionStandingsModel {
 
-    val competition: CompetitionShortModel? = competition?.let { competition ->
-        CompetitionShortModel(
-            competition.id, competition.name, competition.code, competition.type, competition.emblem
+    val competition: CompetitionModel? = competition?.let { competition ->
+        CompetitionModel(
+            competition.id?:-1, competition.name?:"", competition.code?:"", competition.type?:"", competition.emblem?:"", "", favoriteCompetition
         )
     }
 
@@ -72,3 +82,18 @@ fun CompetitionStandingsData.toModel(): CompetitionStandingsModel {
     )
 
 }
+
+
+fun FavoriteCompetitionEntity.toModel(): CompetitionModel {
+    return CompetitionModel(
+        id = id, name = name?:"", code = code?:"", type = type?:"", emblem = emblem?:"", plan = "", true
+    )
+}
+
+
+fun CompetitionModel.toEntity(): FavoriteCompetitionEntity {
+    return FavoriteCompetitionEntity(
+        id = id, name = name, code = code, type = type, emblem = emblem
+    )
+}
+

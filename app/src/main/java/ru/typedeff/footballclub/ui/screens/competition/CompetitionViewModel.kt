@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.typedeff.footballclub.domain.models.CompetitionShortModel
+import ru.typedeff.footballclub.domain.models.CompetitionModel
 import ru.typedeff.footballclub.domain.models.TableModel
+import ru.typedeff.footballclub.domain.usecases.FavoriteCompetitionUseCase
 import ru.typedeff.footballclub.domain.usecases.GetStandingsCompetitionByIdUseCase
 
 
@@ -15,22 +16,29 @@ data class StandingsRow(
     val id: String, val strings: List<String>
 )
 
-class CompetitionViewModel(private val getStandingsCompetitionByIdUseCase: GetStandingsCompetitionByIdUseCase, competitionId:String) :
-    ViewModel() {
+class CompetitionViewModel(
+    private val getStandingsCompetitionByIdUseCase: GetStandingsCompetitionByIdUseCase,
+    private val favoriteCompetitionUseCase: FavoriteCompetitionUseCase,
+    private val competitionId: String
+) : ViewModel() {
 
-    val competitionLiveData = MutableLiveData<CompetitionShortModel?>()
+    val competitionLiveData = MutableLiveData<CompetitionModel?>()
     val standingsLiveData = MutableLiveData<List<StandingsRow>>()
+    val favoriteCompetitionsLiveData = MutableLiveData<Boolean>()
 
 
     init {
         loadData(competitionId)
     }
+
     private fun loadData(id: String) {
         viewModelScope.launch {
             delay(1000)
             val competitionStandingsModel = getStandingsCompetitionByIdUseCase.execute(id)
             competitionLiveData.value = competitionStandingsModel.competition
             standingsLiveData.value = tablesToListRow(competitionStandingsModel.tables)
+
+            _loadFavoriteCompetitions()
         }
     }
 
@@ -39,7 +47,7 @@ class CompetitionViewModel(private val getStandingsCompetitionByIdUseCase: GetSt
 
             val strings = listOf(
                 tableItem.position.toString(),
-                tableItem.team?.name ?: "",
+                tableItem.team?.shortName ?: "",
                 tableItem.playedGames.toString(),
                 tableItem.won.toString(),
                 tableItem.draw.toString(),
@@ -55,4 +63,20 @@ class CompetitionViewModel(private val getStandingsCompetitionByIdUseCase: GetSt
         }
         return resultList
     }
+
+    fun switchFavorite(competition: CompetitionModel, isFavorite: Boolean) {
+        viewModelScope.launch {
+            favoriteCompetitionUseCase.set(competition, isFavorite)
+            loadFavoriteCompetitions()
+        }
+    }
+    fun loadFavoriteCompetitions(){
+        viewModelScope.launch {
+            _loadFavoriteCompetitions()
+        }
+    }
+    private suspend fun _loadFavoriteCompetitions() {
+        favoriteCompetitionsLiveData.value = favoriteCompetitionUseCase.get(id = competitionId)
+    }
+
 }

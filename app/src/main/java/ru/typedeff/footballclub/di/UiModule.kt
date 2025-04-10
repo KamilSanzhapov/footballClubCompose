@@ -18,18 +18,26 @@ val uiModule = module {
 
     viewModel<MainViewModel> {
         MainViewModel(
-            getAreaEuropeUseCase = get()
+            getAreaEuropeUseCase = get(), favoriteCompetitionUseCase = get()
         )
     }
     viewModel<AreaViewModel> {
         AreaViewModel(
-            getCompetitionByIdUseCase = get(), getAreaByIdUseCase = get(),
-            areaId=  get()
+            getCompetitionByIdUseCase = get(),
+            getAreaByIdUseCase = get(),
+            favoriteCompetitionUseCase = get(),
+            areaId = get()
         )
     }
 
     viewModel<SettingsViewModel> { SettingsViewModel(themeUseCase = get()) }
 
-    viewModel<CompetitionViewModel> { CompetitionViewModel(getStandingsCompetitionByIdUseCase = get(), competitionId = get()) }
+    viewModel<CompetitionViewModel> {
+        CompetitionViewModel(
+            getStandingsCompetitionByIdUseCase = get(),
+            favoriteCompetitionUseCase = get(),
+            competitionId = get()
+        )
+    }
 
 }

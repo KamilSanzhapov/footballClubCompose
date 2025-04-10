@@ -15,6 +15,9 @@
     <string name="standings_goals_against">ПМ</string>
     <string name="standings_goals_diff">РМ</string>
     <string name="standings_points">О</string>
+    
+    <string name="main_heading_favorite_competition">Избранные лиги</string>
+    <string name="main_heading_areas">Регионы</string>
 
 
 </resources>

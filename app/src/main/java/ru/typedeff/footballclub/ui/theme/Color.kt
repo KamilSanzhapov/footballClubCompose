@@ -23,3 +23,8 @@ val Gray = Color(0XFF546E7A)
 val Gray_2 = Color(0XFF455A64)
 val DarkGray = Color(0XFF37474F)
 val DeepPurple = Color(0XFF673AB7)
+
+
+
+
+val Gold = Color(0xFFFFB74D)

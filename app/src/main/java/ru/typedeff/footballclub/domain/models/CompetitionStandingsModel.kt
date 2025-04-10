@@ -2,7 +2,7 @@ package ru.typedeff.footballclub.domain.models
 
 
 data class CompetitionStandingsModel(
-    val competition: CompetitionShortModel? = null,
+    val competition: CompetitionModel? = null,
     val tables: List<TableModel> = listOf()
 )
 

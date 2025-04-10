@@ -33,7 +33,7 @@ fun AreaScreen(
         topBar = {
             TopBar(
                 areaState.value?.name ?: "",
-                centerIcon = areaState.value?.flag ?: "",
+                centerLogo = areaState.value?.flag ?: "",
                 onLeftClick = {
                     navController.popBackStack()
                 })
@@ -47,22 +47,27 @@ fun AreaScreen(
             LazyColumn(Modifier.padding(start = 8.dp, end = 8.dp, top = 12.dp)) {
                 items(competitionState.value?.competitions?.size ?: 0) { index ->
                     competitionState.value?.competitions?.get(index)?.let { competition ->
-                        CompetitionCard(competition) {
+                        CompetitionCard(competition, {
                             navController.navigate(Screen.Competition.screenName + "/${competition.id}")
-                        }
+                        }, { favoriteState ->
+                            vm.switchFavorite(competition, favoriteState)
+                        })
                     }
                 }
             }
         }
     }
+
 }
 
 
 @Composable
-fun CompetitionCard(competitionModel: CompetitionModel, click: () -> Unit) {
+fun CompetitionCard(
+    competitionModel: CompetitionModel, click: () -> Unit, onFavoriteBtn: (Boolean) -> Unit
+) {
     ListCard {
         Box(modifier = Modifier.clickable(onClick = click)) {
-            CompetitionItem(competitionModel)
+            CompetitionItem(competitionModel, onFavoriteBtn)
         }
     }
 }

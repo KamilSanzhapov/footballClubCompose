@@ -45,8 +45,10 @@ fun TopBarIcon(
 @Composable
 fun TopBar(
     title: String = "",
-    centerIcon: String = "",
+    centerLogo: String = "",
+    leftIcon: (@Composable () -> Unit)? = null,
     onLeftClick: (() -> Unit)? = null,
+    rightIcon: (@Composable () -> Unit)? = null,
     onRightClick: (() -> Unit)? = null
 ) {
     Column {
@@ -57,12 +59,24 @@ fun TopBar(
                 .background(color = MaterialTheme.colorScheme.primary),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            TopBarIcon(Icons.AutoMirrored.Filled.ArrowBack, onLeftClick == null, onLeftClick)
+            leftIcon?.invoke() ?: run {
+                TopBarIcon(
+                    Icons.AutoMirrored.Filled.ArrowBack,
+                    (leftIcon == null && onLeftClick == null),
+                    onLeftClick
+                )
+            }
             Spacer(modifier = Modifier.weight(1f))
-            SVGImage(centerIcon)
-            TextTitle(title)
+            SVGImage(centerLogo)
+            TextTitle(title, Modifier.padding(start = 8.dp))
             Spacer(modifier = Modifier.weight(1f))
-            TopBarIcon(Icons.Rounded.Settings, onRightClick == null, onRightClick)
+            rightIcon?.invoke() ?: run {
+                TopBarIcon(
+                    Icons.Rounded.Settings,
+                    (rightIcon == null && onRightClick == null),
+                    onRightClick
+                )
+            }
         }
     }
 

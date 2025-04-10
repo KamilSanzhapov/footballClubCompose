@@ -34,6 +34,7 @@ import org.koin.core.parameter.parametersOf
 import ru.typedeff.footballclub.ui.screens.competition.pages.MatchesPage
 import ru.typedeff.footballclub.ui.screens.competition.pages.ScorersPage
 import ru.typedeff.footballclub.ui.screens.competition.pages.StandingsPage
+import ru.typedeff.footballclub.ui.widgets.FavoriteButton
 import ru.typedeff.footballclub.ui.widgets.TopBar
 
 @Composable
@@ -42,14 +43,24 @@ fun CompetitionScreen(
 ) {
     val viewModel = koinViewModel<CompetitionViewModel>(parameters = { parametersOf(id) })
     val competitionState = viewModel.competitionLiveData.observeAsState()
+    viewModel.favoriteCompetitionsLiveData.observeAsState()
 
     Scaffold(
         topBar = {
             TopBar(
                 competitionState.value?.name ?: "",
-                centerIcon = competitionState.value?.emblem ?: "",
+                centerLogo = competitionState.value?.emblem ?: "",
                 onLeftClick = {
                     navController.popBackStack()
+                },
+                rightIcon = {
+                    competitionState.value?.let { competition ->
+                        FavoriteButton(
+                            favoriteStartState = competition.isFavorite
+                        ) {
+                            viewModel.switchFavorite(competition, it)
+                        }
+                    }
                 })
         }) { padding ->
         Box(modifier = Modifier.padding(padding)) {

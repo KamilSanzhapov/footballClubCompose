@@ -2,6 +2,7 @@ package ru.typedeff.footballclub.di
 
 import org.koin.dsl.module
 import ru.typedeff.footballclub.domain.usecases.ChangeThemeUseCase
+import ru.typedeff.footballclub.domain.usecases.FavoriteCompetitionUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAreaByIdUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAvailableAreasUseCase
 import ru.typedeff.footballclub.domain.usecases.GetCompetitionByIdUseCase
@@ -28,5 +29,6 @@ val domainModule = module {
     factory<GetStandingsCompetitionByIdUseCase> {
         GetStandingsCompetitionByIdUseCase(competitionRepository = get())
     }
+    factory<FavoriteCompetitionUseCase> { FavoriteCompetitionUseCase(favoriteRepository = get()) }
 
 }

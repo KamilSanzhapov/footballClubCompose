@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,13 +23,23 @@ fun AreaItem(areaModel: AreaModel?) {
 }
 
 @Composable
-fun CompetitionItem(competitionModel: CompetitionModel?) {
+fun CompetitionItem(competitionModel: CompetitionModel?, onRightBtn: ((Boolean) -> Unit)) {
     if (competitionModel == null) return
-    BaseItem(competitionModel.name, competitionModel.emblem)
+    BaseItem(
+        competitionModel.name,
+        competitionModel.emblem,
+        isFavorite = competitionModel.isFavorite,
+        onRightBtn = onRightBtn
+    )
 }
 
 @Composable
-fun BaseItem(title: String, leftIcon: String, onRightBtn: (() -> Unit)? = null) {
+fun BaseItem(
+    title: String,
+    leftIcon: String,
+    isFavorite: Boolean = false,
+    onRightBtn: ((Boolean) -> Unit)? = null
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -40,7 +50,8 @@ fun BaseItem(title: String, leftIcon: String, onRightBtn: (() -> Unit)? = null) 
         SVGImage(leftIcon)
         TextNormal(title, modifier = Modifier.padding(horizontal = 16.dp))
         Spacer(modifier = Modifier.weight(1f))
-        Icon(Icons.Filled.KeyboardArrowRight, "")
+        if (onRightBtn != null) FavoriteButton(isFavorite, onRightBtn)
+        Icon(Icons.AutoMirrored.Filled.KeyboardArrowRight, "")
     }
 }
 
