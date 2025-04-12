@@ -6,6 +6,7 @@ import ru.typedeff.footballclub.domain.usecases.FavoriteCompetitionUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAreaByIdUseCase
 import ru.typedeff.footballclub.domain.usecases.GetAvailableAreasUseCase
 import ru.typedeff.footballclub.domain.usecases.GetCompetitionByIdUseCase
+import ru.typedeff.footballclub.domain.usecases.GetMatchesCompetitionByIdUseCase
 import ru.typedeff.footballclub.domain.usecases.GetStandingsCompetitionByIdUseCase
 
 
@@ -30,5 +31,6 @@ val domainModule = module {
         GetStandingsCompetitionByIdUseCase(competitionRepository = get())
     }
     factory<FavoriteCompetitionUseCase> { FavoriteCompetitionUseCase(favoriteRepository = get()) }
+    factory<GetMatchesCompetitionByIdUseCase> { GetMatchesCompetitionByIdUseCase(competitionRepository = get()) }
 
 }

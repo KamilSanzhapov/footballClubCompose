@@ -28,3 +28,5 @@ val DeepPurple = Color(0XFF673AB7)
 
 
 val Gold = Color(0xFFFFB74D)
+val GREEN_LIVE = Color(0XFF6DD58C)
+val RED_ERROR = Color(0XFFFF3333)

@@ -7,6 +7,7 @@ import ru.typedeff.footballclub.data.api.api_models.AreaData
 import ru.typedeff.footballclub.data.api.api_models.CompetitionStandingsData
 import ru.typedeff.footballclub.data.api.api_models.ListCompetitionData
 import ru.typedeff.footballclub.data.api.api_models.ListAreaData
+import ru.typedeff.footballclub.data.api.api_models.ListMatchesData
 
 interface ApiService {
 
@@ -23,11 +24,9 @@ interface ApiService {
     suspend fun getCompetitionStandingsById(@Path("id") id: String) : CompetitionStandingsData
 
     @GET("competitions/{id}/matches")
-    suspend fun getCompetitionMatchesById(@Path("id") id: String)
+    suspend fun getCompetitionMatchesById(@Path("id") id: String) : ListMatchesData
 
-    @GET("competitions/{id}/scorers")
+    @GET("competitions/{id}/scorers/?status=IN_PLAY")
     suspend fun getCompetitionTopScorersById(@Path("id") id: String)
-
-
 
 }

@@ -35,6 +35,7 @@ val uiModule = module {
     viewModel<CompetitionViewModel> {
         CompetitionViewModel(
             getStandingsCompetitionByIdUseCase = get(),
+            getMatchesCompetitionByIdUseCase = get(),
             favoriteCompetitionUseCase = get(),
             competitionId = get()
         )

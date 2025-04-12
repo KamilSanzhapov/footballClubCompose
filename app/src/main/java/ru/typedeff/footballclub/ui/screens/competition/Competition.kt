@@ -105,8 +105,8 @@ fun CompetitionTabs() {
                 .weight(1f)
         ) {
             when (Tabs.entries[selectedTabIndex.value]) {
-                Tabs.Standings -> StandingsPage()
                 Tabs.Matches -> MatchesPage()
+                Tabs.Standings -> StandingsPage()
                 Tabs.Scorers -> ScorersPage()
             }
         }
@@ -116,17 +116,19 @@ fun CompetitionTabs() {
 enum class Tabs(
     val selectedIcon: ImageVector, val unSelectedIcon: ImageVector, val description: String
 ) {
-    Standings(
-        selectedIcon = Icons.AutoMirrored.Filled.List,
-        unSelectedIcon = Icons.AutoMirrored.Outlined.List,
-        description = "Standings"
-    ),
 
     Matches(
         selectedIcon = Icons.Filled.DateRange,
         unSelectedIcon = Icons.Outlined.DateRange,
         description = "Matches"
     ),
+
+    Standings(
+        selectedIcon = Icons.AutoMirrored.Filled.List,
+        unSelectedIcon = Icons.AutoMirrored.Outlined.List,
+        description = "Standings"
+    ),
+
 
 
     Scorers(

@@ -19,5 +19,12 @@
     <string name="main_heading_favorite_competition">Избранные лиги</string>
     <string name="main_heading_areas">Регионы</string>
 
+    <string name="match_live">LIVE</string>
+    <string name="match_paused">П/П</string>
+    <string name="match_suspend">Ост.</string>
+    <string name="match_postponed">Отл.</string>
+    <string name="match_cancelled">Отм.</string>
+
+
 
 </resources>
