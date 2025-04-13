@@ -58,7 +58,8 @@ class CompetitionViewModel(
                 tableItem.goalsFor.toString(),
                 tableItem.goalsAgainst.toString(),
                 tableItem.goalDifference.toString(),
-                tableItem.points.toString()
+                tableItem.points.toString(),
+                tableItem.form.toString()
 
             )
 

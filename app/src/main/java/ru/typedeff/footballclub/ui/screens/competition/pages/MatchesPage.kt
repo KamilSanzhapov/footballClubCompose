@@ -1,6 +1,7 @@
 package ru.typedeff.footballclub.ui.screens.competition.pages
 
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,7 +54,7 @@ fun MatchesPage() {
                 }
                 if (!findIndexScroll) {
                     val curDate = LocalDate.now()
-                    if (curDate.isBefore(date)) {
+                    if (date.isAfter(curDate) || date == curDate) {
                         findIndexScroll = true
                     } else {
                         index++

@@ -1,5 +1,6 @@
 package ru.typedeff.footballclub.ui.screens.competition.pages
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,12 +28,12 @@ fun StandingsPage() {
     ) {
 
         StandingsItem(
-            getTitlesRow()
+            false, getTitlesRow()
         )
         LazyColumn {
             items(standingsState.value?.size ?: 0) { index ->
                 StandingsItem(
-                    standingsState.value?.get(index)?.strings ?: emptyList()
+                    index % 2 == 0, standingsState.value?.get(index)?.strings ?: emptyList()
                 )
             }
         }
@@ -43,7 +44,7 @@ fun StandingsPage() {
 
 val listWeightsRow = listOf(
     0.05555556f,
-    0.5f,
+    0.45f,
     0.05555556f,
     0.05555556f,
     0.05555556f,
@@ -54,13 +55,13 @@ val listWeightsRow = listOf(
     0.05555556f
 )
 
+//
 @Composable
-fun StandingsItem(listNamesRow: List<String>) {
+fun StandingsItem(lightBackground: Boolean, listNamesRow: List<String>) {
 
     if (listNamesRow.size != listWeightsRow.size) RuntimeException("Not valid list")
-    Row {
+    Row(modifier = Modifier.background(if (lightBackground) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.background )) {
         listWeightsRow.forEachIndexed { index, weight ->
-
             Text(
                 text = listNamesRow[index],
                 maxLines = 1,
@@ -70,7 +71,7 @@ fun StandingsItem(listNamesRow: List<String>) {
                 color = MaterialTheme.colorScheme.onBackground,
                 textAlign = if (index != 1) TextAlign.Center else TextAlign.Start,
 
-            )
+                )
         }
     }
 }
